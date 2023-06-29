@@ -1,4 +1,5 @@
 import { type Cameras, type PhotosFilters } from '@/mars/types'
+import { DateTime } from 'luxon'
 
 export const BASE_API_URL = 'https://api.nasa.gov/mars-photos/api/v1'
 export const ROVERS = ['curiosity', 'opportunity', 'spirit'] as const
@@ -23,7 +24,7 @@ export const CAMERAS: Cameras[] = [
 export const DEFAULT_FILTERS: PhotosFilters = {
   rover: 'curiosity',
   camera: 'all',
-  earthDate: undefined,
-  sol: 1,
+  earthDate: DateTime.now().minus({ day: 1 }).toISODate() ?? undefined,
+  sol: undefined,
   page: 1
 }

@@ -9,7 +9,7 @@ interface Props {
 
 export const SolFilter: React.FC<Props> = ({ max }) => {
   const { query, push } = useRouter()
-  const [sol, setSol] = useState(parseInt((query.sol ?? DEFAULT_FILTERS.sol) as string, 10))
+  const [sol, setSol] = useState(parseInt((query.sol ?? '1') as string, 10))
 
   const marks = [
     { value: 1, label: '1' },
