@@ -1,5 +1,7 @@
 # Southern Code Challenge
 
+[![Website]](https://southern-front-end-challenge-killoblanco.vercel.app/)
+
 ## Using React, build an app that:
 
 - ✅ Connects to the NASA API (NASA Open APIs):
@@ -18,3 +20,5 @@
 - ✅ You can (and will get extra points) use NextJS to develop your app.
 - ✅ We do care about the UX design, a nicely styled app would get extra points :D
 - ✅ Please use a linter!
+
+[website]: https://img.shields.io/badge/-Demo_Page-blue?style=plastic&logo=MicrosoftEdge&color=3277BC
