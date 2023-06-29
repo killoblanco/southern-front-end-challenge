@@ -1,4 +1,3 @@
-import { DEFAULT_FILTERS } from '@/mars/constants'
 import { Slider, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'

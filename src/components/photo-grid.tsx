@@ -16,7 +16,7 @@ export const PhotoGrid: React.FC<Props> = ({ photos }) => {
 
   return (
     <ImageList variant="masonry" cols={3} gap={16}>
-      {photos.map((photo, idx) => (
+      {photos.map((photo) => (
         <ImageListItem key={photo.id}>
           <img src={photo.src} alt={`photo-${photo.id}`} />
           <ImageListItemBar title={photo.camera} />
