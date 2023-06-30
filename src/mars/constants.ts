@@ -1,7 +1,7 @@
 import { type Cameras, type PhotosFilters } from '@/mars/types'
 import { DateTime } from 'luxon'
 
-export const BASE_API_URL = 'https://api.nasa.gov/mars-photos/api/v1'
+export const BASE_API_URL = 'https://api.nasa.gov/mars-photos/api/v1/'
 export const ROVERS = ['curiosity', 'opportunity', 'spirit'] as const
 
 export const CAMERAS: Cameras[] = [
