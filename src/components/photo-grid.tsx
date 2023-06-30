@@ -1,22 +1,30 @@
-import { type GetPhotosResponse } from '@/mars/types'
-import { ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material'
+import { useFilterSelector } from '@/mars/slices/filters/selector'
+import { useGetPhotosByFiltersQuery } from '@/mars/slices/api'
+import { Box, CircularProgress, ImageList, ImageListItem, ImageListItemBar, Typography } from '@mui/material'
 
-interface Props {
-  photos: GetPhotosResponse
-}
+export const PhotoGrid: React.FC = () => {
+  const filters = useFilterSelector()
+  const { data, isLoading } = useGetPhotosByFiltersQuery(filters)
 
-export const PhotoGrid: React.FC<Props> = ({ photos }) => {
-  if (photos.length === 0) {
+  if (isLoading) {
     return (
-      <Typography variant="h4" align="center">
-        No photos found.
+      <Box mx="auto" width="fit-content">
+        <CircularProgress />
+      </Box>
+    )
+  }
+
+  if (data == null || data.length === 0) {
+    return (
+      <Typography variant="h5" align="center">
+        No photos found
       </Typography>
     )
   }
 
   return (
     <ImageList variant="masonry" cols={3} gap={16}>
-      {photos.map((photo) => (
+      {(data ?? []).map((photo) => (
         <ImageListItem key={photo.id}>
           <img src={photo.src} alt={`photo-${photo.id}`} />
           <ImageListItemBar title={photo.camera} />
