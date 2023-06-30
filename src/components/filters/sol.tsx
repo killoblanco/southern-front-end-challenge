@@ -1,36 +1,30 @@
 import { Slider, Typography } from '@mui/material'
-import { useRouter } from 'next/router'
+import { useFilterSelector } from '@/mars/slices/filters/selector'
+import { useFilterActions } from '@/mars/slices/filters/actions'
 import { useEffect, useState } from 'react'
+import { useGetManifestByRoverQuery } from '@/mars/slices/api'
 
-interface Props {
-  max: number
-}
-
-export const SolFilter: React.FC<Props> = ({ max }) => {
-  const { query, push } = useRouter()
-  const [sol, setSol] = useState(parseInt((query.sol ?? '1') as string, 10))
-
-  const marks = [
-    { value: 1, label: '1' },
-    ...(Array.from(
-      { length: 5 },
-      (_, idx) => {
-        if (idx === 4) return max
-        return Math.floor((max / 5) * (idx + 1))
-      }).map((value) => ({ value, label: value.toString() })))
-  ]
+export const SolFilter: React.FC = () => {
+  const { rover, sol } = useFilterSelector()
+  const { setSol } = useFilterActions()
+  const { data, isLoading } = useGetManifestByRoverQuery(rover)
+  const [max, setMax] = useState<number | undefined>(undefined)
+  const [marks, setMarks] = useState<number[]>([1])
 
   useEffect(() => {
-    delete query.earthDate
-    void push({
-      pathname: '/',
-      query: {
-        ...query,
-        sol,
-        page: 1
-      }
-    })
-  }, [sol])
+    if (data != null) {
+      setMax(data.maxSol)
+    }
+  }, [data])
+
+  useEffect(() => {
+    if (max != null) {
+      setMarks([1, ...(Array.from(
+        { length: 5 },
+        (_, idx) => Math.floor((max / 5) * (idx + 1))
+      ))])
+    }
+  }, [max])
 
   const handleOnChange = (event: React.SyntheticEvent | Event, sol: number | number[]): void => {
     setSol(sol as number)
@@ -40,12 +34,13 @@ export const SolFilter: React.FC<Props> = ({ max }) => {
     <>
       <Typography>Sol Date</Typography>
       <Slider
+        disabled={isLoading}
         step={1}
-        value={sol}
-        onChangeCommitted={handleOnChange}
         min={1}
         max={max}
-        marks={marks}
+        marks={marks.map((mark) => ({ value: mark, label: mark }))}
+        value={sol ?? 1}
+        onChangeCommitted={handleOnChange}
         valueLabelDisplay="auto"
       />
     </>
