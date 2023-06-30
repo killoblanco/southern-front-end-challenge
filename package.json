@@ -16,19 +16,22 @@
     "@material/material-color-utilities": "0.2.6",
     "@mui/material": "5.13.6",
     "@mui/x-date-pickers": "6.9.0",
-    "@types/node": "20.3.2",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.6",
+    "@reduxjs/toolkit": "1.9.5",
     "eslint-config-next": "13.4.7",
     "framer-motion": "10.12.17",
     "luxon": "3.3.0",
     "next": "13.4.7",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-redux": "8.1.1"
   },
   "devDependencies": {
     "@iconify/react": "4.1.1",
+    "@testing-library/react": "14.0.0",
     "@types/luxon": "3.3.0",
+    "@types/node": "20.3.2",
+    "@types/react": "18.2.14",
+    "@types/react-dom": "18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "eslint": "^8.43.0",
     "eslint-config-standard-with-typescript": "^35.0.0",
@@ -36,6 +39,7 @@
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
-    "typescript": "^5.1.5"
+    "typescript": "^5.1.5",
+    "vitest": "0.32.2"
   }
 }
