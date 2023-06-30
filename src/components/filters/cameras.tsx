@@ -1,23 +1,15 @@
-import { CAMERAS, DEFAULT_FILTERS } from '@/mars/constants'
-import { type RoversT } from '@/mars/types'
+import { CAMERAS } from '@/mars/constants'
 import { Icon } from '@iconify/react'
 import { InputAdornment, MenuItem, TextField } from '@mui/material'
-import { useRouter } from 'next/router'
+import { useFilterSelector } from '@/mars/slices/filters/selector'
+import { useFilterActions } from '@/mars/slices/filters/actions'
 
 export const CameraFilter: React.FC = () => {
-  const { query, push } = useRouter()
-  const rover = (query.rover ?? DEFAULT_FILTERS.rover) as RoversT
-  const camera = query.camera ?? DEFAULT_FILTERS.camera
+  const { camera, rover } = useFilterSelector()
+  const { setCamera } = useFilterActions()
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    void push({
-      pathname: '/',
-      query: {
-        ...query,
-        camera: event.target.value,
-        page: 1
-      }
-    })
+    setCamera(event.target.value)
   }
 
   return (
