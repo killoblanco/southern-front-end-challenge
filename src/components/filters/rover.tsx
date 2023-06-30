@@ -1,21 +1,15 @@
-import { DEFAULT_FILTERS, ROVERS } from '@/mars/constants'
+import { ROVERS } from '@/mars/constants'
 import { Icon } from '@iconify/react'
 import { Chip, Stack, Typography } from '@mui/material'
-import { useRouter } from 'next/router'
+import { useFilterSelector } from '@/mars/slices/filters/selector'
+import { useFilterActions } from '@/mars/slices/filters/actions'
 
 export const RoverFilter: React.FC = () => {
-  const { query, push } = useRouter()
-  const rover = query.rover ?? DEFAULT_FILTERS.rover
+  const { rover } = useFilterSelector()
+  const { setRover } = useFilterActions()
 
   const handleOnChange = (roverName: string) => () => {
-    void push({
-      pathname: '/',
-      query: {
-        camera: DEFAULT_FILTERS.camera,
-        rover: roverName,
-        page: 1
-      }
-    })
+    setRover(roverName)
   }
 
   return (
